@@ -160,7 +160,14 @@ def train_net(
             # pass to the network, and make a step for the optimizer.                   #
             # Store the loss to loss_hist                                               #
             #############################################################################
-            pass
+            output = model.forward(data_batch)
+            loss = loss_func.forward(output, labels_batch)
+            loss_hist.append(loss)
+
+            dloss = loss_func.backward()
+            model.backward(dloss)
+
+            optimizer.step()
             #############################################################################
             #                             END OF YOUR CODE                              #
             #############################################################################
@@ -181,7 +188,10 @@ def train_net(
         # compute_acc method, store the results to train_acc and val_acc,           #
         # respectively                                                              #
         #############################################################################
-        pass
+        train_acc = compute_acc(model, data_train, labels_train)
+        val_acc = compute_acc(model, data_val, labels_val)
+        train_acc_hist.append(train_acc)
+        val_acc_hist.append(val_acc) 
         #############################################################################
         #                             END OF YOUR CODE                              #
         #############################################################################
@@ -194,7 +204,9 @@ def train_net(
             # TODO: Save the optimal parameters to opt_params variable by name using    #
             # model.net.gather_params method                                            #
             #############################################################################
-            pass
+            opt_val_acc = val_acc
+            model.net.gather_params()
+            opt_params = model.net.params.copy()
             #############################################################################
             #                             END OF YOUR CODE                              #
             #############################################################################
