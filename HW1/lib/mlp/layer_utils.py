@@ -280,7 +280,7 @@ class dropout(object):
         # print(self.keep_prob)
         if is_training and self.keep_prob:
 
-            kept = self.rng.rand(*feat.shape) <= self.keep_prob * (1/self.keep_prob)
+            kept = self.rng.rand(*feat.shape) <= self.keep_prob 
             output = feat * kept / self.keep_prob
         
         else:

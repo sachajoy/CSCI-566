@@ -195,8 +195,6 @@ def train_net(
         #############################################################################
         #                             END OF YOUR CODE                              #
         #############################################################################
-        train_acc_hist.append(train_acc)
-        val_acc_hist.append(val_acc)
 
         # Save the best params for the model
         if val_acc > opt_val_acc:
